@@ -31,7 +31,7 @@
     width: 45px;
     height: 35px;
 }
-.caixamensagensl{
+.caixamensagens{
     height: 100%;
 
 }
@@ -65,6 +65,7 @@ li{
 .texto{
     margin: 0px 10px;
     font-size: 15px;
+    display: flex;
 }
 .barrainferior{
     position: fixed;
@@ -87,5 +88,12 @@ height: 26px;
     font-size: 18px;
     font-style: italic;
 }
+.hora{
+    color:rgba(170, 170, 170, 1) ;
+}
+.login{
+    font-weight: bold;
+    margin: 0px 8px;
 
+}
 }
