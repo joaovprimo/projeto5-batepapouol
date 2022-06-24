@@ -5,6 +5,7 @@ let horas = data.getHours();
 let minutos = data.getMinutes();
 let segundos = data.getSeconds();
 let hhmmss = [horas, minutos, segundos].join(':');
+let mensagem;
 
 entrarNaPagina()
 function entrarNaPagina (){
@@ -23,10 +24,8 @@ promise.catch(tratarErro);
 
 function tratarSucesso(sucesso){
 let qlsucesso = sucesso.status;
-    alert (`seja bem-vindo ${login}`);
-   let entrou = document.querySelector('.caixamensagens');
-   entrou.innerHTML = `<li class="status"> <div class="texto">
-   <div class="hora">${(hhmmss)}</div> <div class="login"> ${login} </div> entrou na sala..</div></li>`;
+console.log(`${login}`)
+    setInterval(recebeMsg,3000);
    setInterval(confirmaConexao,5000);
 }
 
@@ -41,6 +40,32 @@ function tratarErro(erro){
     enviaNome();
 }
 }
+function recebeMsg(){
+ let listaDeMensagem = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
+ listaDeMensagem.then(processaMensagem);
+}
+
+function processaMensagem(mensagem){
+    let mensg = document.querySelector('.caixamensagens').innerHTML;
+    mensg="";
+    if(mensagem.type === 'status'){
+   mensg += `<li class="status"> <div class="texto">
+   <div class="hora">${mensagem.time}</div> <div class="login"> ${mensagem.from} </div> ${mensagem.text}</div></li>`;
+    }
+    if(mensagem.type ==="message"){
+       mensg += `<li class="normais"><div class="texto">
+       <div class="hora">${mensagem.time}</div>
+       <div class="nome"> ${mensagem.from} </div> 
+       para  <div class="nome"> ${mensagem.to}</div>: ${mensagem.text}</div></li>`;
+    }
+    if(mensagem.type ==="private_message"){
+        mensg += `<li class="reservado"><div class="texto">
+        <div class="hora">${mensagem.time}</div>
+        <div class="nome"> ${mensagem.from} </div> 
+        reservadamente para  <div class="nome"> ${mensagem.to}</div>: ${mensagem.text}</div></li>`;
+     }
+    }
+
 
 function confirmaConexao(){
     let promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', pessoa);
