@@ -2,7 +2,7 @@
 *{
     box-sizing: border-box;
 }
-    body{
+body{
         background-color: #E5E5E5;
         font-family: 'Roboto', sans-serif;
 }
@@ -13,7 +13,7 @@
     display: flex;
     align-items: center;
     box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.05);
-    
+    position: relative;
 }
 .container{
     width: 100%;
@@ -33,47 +33,42 @@
 }
 .caixamensagens{
     height: 100%;
-
+    overflow: scroll;
+    position: relative;
 }
 ul{
     margin-top: 25px;
-
 }
 li{
-    width: 100%;
-    height: 40px;
-    background-color: aqua;
-    margin-bottom: 5px;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: start;
 
 }
 .status{
     background: rgba(220, 220, 220, 1);
-
+    
 }
-.normais{
+.message{
     background: rgba(255, 255, 255, 1);
-
+    
 }
-.reservado{
+.private_message{
     background: rgba(255, 222, 222, 1);
-
+  
 }
 .texto{
-    margin: 0px 10px;
+    margin: 4px 0;
     font-size: 15px;
     display: flex;
+    align-items: center;
+    width: 100%;
+    display: inline-block;
+    height: auto;
 }
 .barrainferior{
-    position: fixed;
+    position: absolute;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px -4px 6px 0px rgba(0, 0, 0, 0.05);
 height: 80px;
 width: 100%;
-bottom: 0;
 display: flex;
 align-items: center;
 justify-content: space-evenly;
@@ -90,10 +85,13 @@ height: 26px;
 }
 .hora{
     color:rgba(170, 170, 170, 1) ;
+    margin-left: 10px;
 }
-.login{
+.nome{
     font-weight: bold;
-    margin: 0px 8px;
-
+    margin-left: 8px;
+}
+.txt{
+    flex-wrap: wrap-reverse;
 }
 }

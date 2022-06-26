@@ -44,33 +44,31 @@ function processaMensagem(mensagem){
     mensg.innerHTML ="";
     for(let i=0; i<data.length;i++){
     if(data[i].type==='status'){
-    mensg.innerHTML+= `<li class="status"> 
-        <div class="texto">
-        <div class="hora">${data[i].time}</div>
-        <div class="login"> ${data[i].from} </div> 
-        ${data[i].text}</div>
+    mensg.innerHTML+= `<li class="texto ${data[i].type}">
+        <span class="hora">${data[i].time}</span>
+        <span class="nome">${data[i].from}</span> 
+        <span class="txt">${data[i].text}</span>
+         </p>
     </li>`;
     }
     if(data[i].type ==="message"){
        mensg.innerHTML +=
-    `<li class="normais">
-        <div class="texto">
-        <div class="hora">${data[i].time}</div>
-        <div class="nome"> ${data[i].from} </div> 
-        para  
-        <div class="nome"> ${data[i].to}</div>
-        : ${data[i].text}</div>
+    `<li class="texto ${data[i].type}">
+        <span class="hora">${data[i].time}</span>
+        <span class="nome"> ${data[i].from}</span> 
+        para<span class="nome">${data[i].to}</span>: 
+        <span class="txt">${data[i].text}</span>
+        </p>
     </li>`;
     }
     if(data[i].type ==="private_message"){
         mensg.innerHTML += 
-    `<li class="reservado">
-        <div class="texto">
-        <div class="hora">${data[i].time}</div>
-        <div class="nome"> ${data[i].from} </div> 
-        reservadamente para  
-        <div class="nome"> ${data[i].to}</div>:
-        ${data[i].text}</div>
+    `<li class="texto ${data[i].type}">
+        <span class="hora">${data[i].time}</span>
+        <span class="nome">${data[i].from}</span> 
+        reservadamente para<span class="nome">${data[i].to}</span>:
+        <span class="txt">${data[i].text}</span>
+        </p>
      </li>`;
      }
     }
@@ -89,4 +87,28 @@ console.log('continua Online');
 function deslogou (saiu) {
 let statusoff = saiu.response.status;
 console.log("saiu da sala");
+}
+
+function apareceBarraInferior(){
+    const barrinf = document.querySelector(".barrainferior");
+    barrinf.scrollIntoView();
+}
+function enviaMensagem(){
+    const msg = document.querySelector(".mensagem").value;
+    const novamensagem = {
+        from: login,
+        to: "Todos",
+        text: msg,
+        type: "message"};
+const postamensagem = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', novamensagem);
+postamensagem.then(pegaMensagens);
+postamensagem.catch(recarregaPagina);
+}
+
+function pegaMensagens (mens){
+recebeMsg();
+}
+
+function recarregaPagina(deslog){
+    window.location.reload();
 }
