@@ -19,7 +19,7 @@ promise.catch(tratarErro);
 
 function tratarSucesso(sucesso){
 console.log(`${login}`);
-    setInterval(recebeMsg,3000);
+    recebeMsg();
     setInterval(confirmaConexao,5000);
 }
 
@@ -80,6 +80,10 @@ function processaMensagem(mensagem){
 ultimamsg.scrollIntoView();
 }
 
+function atualizaPagina (){
+    setInterval(recebeMsg,3000);
+}
+atualizaPagina()
 
 function confirmaConexao(){
     const promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', pessoa);
@@ -110,6 +114,8 @@ function enviaMensagem(){
 const postamensagem = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', novamensagem);
 postamensagem.then(pegaMensagens);
 postamensagem.catch(recarregaPagina);
+const ms = document.querySelector(".mensagem");
+ms.value = "";
 }
 
 function pegaMensagens (mens){
@@ -118,5 +124,6 @@ msg.innerHTML="";
 }
 
 function recarregaPagina(deslog){
+    console.log("O usuário não está mais na sala")
     window.location.reload();
 }
