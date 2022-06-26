@@ -1,5 +1,6 @@
 let pessoa = [];
 let login;
+let msg;
 
 entrarNaPagina()
 function entrarNaPagina (){
@@ -44,7 +45,9 @@ function processaMensagem(mensagem){
     mensg.innerHTML ="";
     for(let i=0; i<data.length;i++){
     if(data[i].type==='status'){
-    mensg.innerHTML+= `<li class="texto ${data[i].type}">
+    mensg.innerHTML+= 
+    `<li class="caixatexto ${data[i].type}">
+        <p class="texto">
         <span class="hora">${data[i].time}</span>
         <span class="nome">${data[i].from}</span> 
         <span class="txt">${data[i].text}</span>
@@ -53,7 +56,8 @@ function processaMensagem(mensagem){
     }
     if(data[i].type ==="message"){
        mensg.innerHTML +=
-    `<li class="texto ${data[i].type}">
+       `<li class="caixatexto ${data[i].type}">
+        <p class="texto">
         <span class="hora">${data[i].time}</span>
         <span class="nome"> ${data[i].from}</span> 
         para<span class="nome">${data[i].to}</span>: 
@@ -63,7 +67,8 @@ function processaMensagem(mensagem){
     }
     if(data[i].type ==="private_message"){
         mensg.innerHTML += 
-    `<li class="texto ${data[i].type}">
+        `<li class="caixatexto ${data[i].type}">
+        <p class="texto">
         <span class="hora">${data[i].time}</span>
         <span class="nome">${data[i].from}</span> 
         reservadamente para<span class="nome">${data[i].to}</span>:
@@ -71,8 +76,10 @@ function processaMensagem(mensagem){
         </p>
      </li>`;
      }
-    }
+} const ultimamsg = mensg.lastChild;
+ultimamsg.scrollIntoView();
 }
+
 
 function confirmaConexao(){
     const promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', pessoa);
@@ -91,10 +98,10 @@ console.log("saiu da sala");
 
 function apareceBarraInferior(){
     const barrinf = document.querySelector(".barrainferior");
-    barrinf.scrollIntoView();
 }
+
 function enviaMensagem(){
-    const msg = document.querySelector(".mensagem").value;
+ msg = document.querySelector(".mensagem").value;
     const novamensagem = {
         from: login,
         to: "Todos",
@@ -107,6 +114,7 @@ postamensagem.catch(recarregaPagina);
 
 function pegaMensagens (mens){
 recebeMsg();
+msg.innerHTML="";
 }
 
 function recarregaPagina(deslog){
