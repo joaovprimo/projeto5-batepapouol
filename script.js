@@ -2,13 +2,23 @@ let pessoa = [];
 let login;
 let msg;
 
-entrarNaPagina()
-function entrarNaPagina (){
-    login = prompt ("Qual seu nome para login?");
+function entrarPaginaEntrada (){
+    login = document.querySelector('.nomedeentrada').value;
     pessoa = {
         name:login
     }
     enviaNome()
+}
+
+function trocapag(){
+   const topo = document.querySelector('.topo');
+   const caixamensagens = document.querySelector('.caixamensagens');
+   const barrainferior = document.querySelector('.barrainferior');
+   const paginadeentrada = document.querySelector('.paginadeentrada');
+   paginadeentrada.classList.add("desativado");
+   topo.classList.remove("desativado");
+   barrainferior.classList.remove("desativado");
+   caixamensagens.classList.remove("desativado");
 }
 
 function enviaNome(){
@@ -19,6 +29,7 @@ promise.catch(tratarErro);
 
 function tratarSucesso(sucesso){
 console.log(`${login}`);
+    trocapag();
     recebeMsg();
     setInterval(confirmaConexao,5000);
 }
@@ -58,10 +69,9 @@ function processaMensagem(mensagem){
        mensg.innerHTML +=
        `<li class="caixatexto ${data[i].type}">
         <p class="texto">
-        <span class="hora">${data[i].time}</span>
-        <span class="nome"> ${data[i].from}</span> 
-        para<span class="nome">${data[i].to}</span>: 
-        <span class="txt">${data[i].text}</span>
+        <span class="hora">${data[i].time}</span> 
+        <span class="nome">${data[i].from}</span> 
+        para<span class="nome">${data[i].to}</span>: <span class="txt">${data[i].text}</span>
         </p>
     </li>`;
     }
@@ -134,5 +144,13 @@ keyBoard.addEventListener('keypress', e =>{
     console.log(e);
     if(e.keyCode === 13){
         enviaMensagem();
+    }
+})
+
+const keyBoard2 = document.querySelector('.nomedeentrada');
+keyBoard2.addEventListener('keypress', e2 =>{
+    console.log(e2);
+    if(e2.keyCode === 13){
+        entrarPaginaEntrada () ;
     }
 })

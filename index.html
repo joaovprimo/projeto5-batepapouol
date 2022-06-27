@@ -12,15 +12,20 @@
     <title>batepapouol</title>
 </head>
 <body>
-<div class="topo">
+<div class="paginadeentrada"> 
+    <img class="imgentrada" src="./logo 1.png">
+    <input type="text" class="nomedeentrada" placeholder="Digite seu nome">
+    <button type="submit" class="botaoentrada" onclick="entrarPaginaEntrada()">Enviar</button>
+</div>
+<div class="topo desativado">
     <div class="container">
     <img src="logo 1.png"/>
     <ion-icon class="iconetopo" name="people"></ion-icon>
 </div>
 </div>
-<div><ul class="caixamensagens">
+<div><ul class="caixamensagens desativado">
 </ul></div>
-<div class="barrainferior">
+<div class="barrainferior desativado">
     <div class="container">
     <input type="text" class="mensagem" placeholder="Escreva aqui..."/>
     <button class="btn" onclick="enviaMensagem()"><ion-icon class="iconeinferior" name="paper-plane-outline"></ion-icon></button>
