@@ -111,6 +111,7 @@ function enviaMensagem(){
         to: "Todos",
         text: msg,
         type: "message"};
+    
 const postamensagem = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', novamensagem);
 postamensagem.then(pegaMensagens);
 postamensagem.catch(recarregaPagina);
@@ -127,3 +128,11 @@ function recarregaPagina(deslog){
     console.log("O usuário não está mais na sala")
     window.location.reload();
 }
+
+const keyBoard = document.querySelector('.mensagem');
+keyBoard.addEventListener('keypress', e =>{
+    console.log(e);
+    if(e.keyCode === 13){
+        enviaMensagem();
+    }
+})
